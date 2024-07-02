@@ -1,0 +1,14 @@
+{% extends "base.twig" %}
+{% block title %}Top Cryptocurrencies{% endblock %}
+{% block content %}
+    <ul class="list-group">
+        {% for cryptocurrency in data.cryptocurrencies %}
+
+            <li class="list-group-item"><a
+                        href="cryptocurrencies/{{ cryptocurrency.symbol }}">{{ cryptocurrency.symbol }}</a> {{ cryptocurrency.name }}
+                - {{ cryptocurrency.price|number_format(2) }} $
+            </li>
+
+        {% endfor %}
+    </ul>
+{% endblock %}

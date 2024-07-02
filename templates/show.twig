@@ -1,0 +1,32 @@
+{% extends "base.twig" %}
+{% block title %}Top Cryptocurrencies{% endblock %}
+{% block content %}
+    {% if session.flash_message %}
+        <div class="alert alert-{{ session.flash_type }}">
+            {{ session.flash_message }}
+        </div>
+
+    {% endif %}
+    <ul>
+        <li>
+            <p>{{ data.cryptocurrency.name }} - {{ data.cryptocurrency.price|number_format(2) }} $</p>
+        </li>
+    </ul>
+    <b>Buy Form</b>
+    <form action="/cryptocurrencies/{{ data.cryptocurrency.symbol }}/buy" method="POST">
+        <div class="form-group">
+            <label for="amount">Amount</label>
+            <input class="form-control" type="text" id="amount" name="amount" required>
+        </div>
+        <button class="btn btn-primary" type="submit">Buy</button>
+    </form>
+    <br>
+    <b>Sell Form</b>
+    <form action="/cryptocurrencies/{{ data.cryptocurrency.symbol }}/sell" method="POST">
+        <div class="form-group">
+            <label for="amount">Amount</label>
+            <input class="form-control" type="text" id="amount" name="amount" required>
+        </div>
+        <button class="btn btn-primary" type="submit">Sell</button>
+    </form>
+{% endblock %}

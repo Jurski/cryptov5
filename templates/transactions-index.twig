@@ -1,0 +1,33 @@
+{% extends "base.twig" %}
+{% block title %}Tranasctions{% endblock %}
+{% block content %}
+    {% if data.transactions %}
+    <table class="table table-dark">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Date</th>
+            <th scope="col">Type</th>
+            <th scope="col">Amount</th>
+            <th scope="col">Cryptocurrency</th>
+            <th scope="col">Purchase Price</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for transaction in data.transactions %}
+            <tr>
+                <th scope="row">{{ loop.index }}</th>
+                <td>{{ transaction.date|date('Y-m-d H:i:s', 'Europe/Riga') }}</td>
+                <td>{{ transaction.type }}</td>
+                <td>{{ transaction.amount }} pcs</td>
+                <td>{{ transaction.cryptocurrency }}</td>
+                <td>{{ transaction.purchasePrice|number_format(2) }} $</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <br>
+    <b>No transactions</b>
+    {% endif %}
+{% endblock %}

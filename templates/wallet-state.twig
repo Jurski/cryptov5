@@ -1,0 +1,53 @@
+{% extends "base.twig" %}
+{% block title %}Wallet State{% endblock %}
+{% block content %}
+    <p>Your cash - {{ data.walletState.cash }}$</p>
+    <p>Your balance - {{ data.walletState.totalBalance }}$</p>
+    <br>
+    <b>Holdings</b>
+    {% if data.walletState.holdings %}
+    <table class="table table-dark">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Cryptocurrency</th>
+            <th scope="col">Amount</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        {% for cryptocurrency, amount in data.walletState.holdings %}
+            <tr>
+                <th scope="row">{{ loop.index }}</th>
+                <td>{{ cryptocurrency }}</td>
+                <td>{{ amount }} pcs</td>
+            </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+
+    <b>Profits</b>
+    <table class="table table-dark">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Cryptocurrency</th>
+            <th scope="col">Change</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for cryptocurrency, profit in data.walletState.profits %}
+            <tr>
+                <th scope="row">{{ loop.index }}</th>
+                <td>{{ cryptocurrency }}</td>
+                <td>{{ profit }} $</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <br>
+        <b>Youve got no holdings</b>
+    {% endif %}
+{% endblock %}
